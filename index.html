@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge Ticket</title>
+  </head>
+
+  <body>
+    <h1 style="text-align: center">Abrir la consola 🍫</h1>
+
+    <script>
+      function tickets(bills) {
+        let bill25 = 0;
+        let bill50 = 0;
+
+        for (let bill of bills) {
+          switch (bill) {
+            case 25:
+              bill25 += 1;
+              break;
+            case 50:
+              if (bill25 > 0) {
+                bill25 -= 1;
+                bill50 += 1;
+              } else {
+                return "NO";
+              }
+              break;
+            case 100:
+              if (bill50 > 0 && bill25 > 0) {
+                bill50 -= 1;
+                bill25 -= 1;
+              } else if (bill25 >= 3) {
+                bill25 -= 3;
+              } else {
+                return "NO";
+              }
+              break;
+            default:
+              return "NO";
+          }
+        }
+
+        return "SI";
+      }
+
+      console.log(tickets([25, 25, 50])); // => SI
+      console.log(tickets([25, 100])); // => NO
+      console.log(tickets([25, 25, 50, 50, 100])); // => NO
+      console.log(tickets([25, 25, 25, 100])); // => SI
+      console.log(tickets([25, 25, 25, 25, 25, 25, 25, 25, 25, 25])); // => SI
+      console.log(tickets([25, 25, 25, 25, 50, 100, 50])); // => SI
+      console.log(tickets([25, 25, 25, 25, 50, 100, 50])); // => SI
+    </script>
+  </body>
+</html>
